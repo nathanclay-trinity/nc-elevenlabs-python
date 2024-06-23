@@ -118,9 +118,13 @@ class RealtimeTextToSpeechClient(TextToSpeechClient):
                     try:
                         data = json.loads(socket.recv(1e-4))
                         if "audio" in data and data["audio"]:
-                            print("yield data")
-                            print(data)
-                            yield data  # type: ignore
+                            json_str = json.dumps(data)
+
+                            base64_encoded = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
+
+                            print("Base64 encoded data:")
+                            print(base64_encoded)
+                            yield base64_encoded
                     except TimeoutError:
                         pass
 
@@ -130,9 +134,13 @@ class RealtimeTextToSpeechClient(TextToSpeechClient):
 
                     data = json.loads(socket.recv())
                     if "audio" in data and data["audio"]:
-                        print("yield data")
-                        print(data)
-                        yield data  # type: ignore
+                        json_str = json.dumps(data)
+
+                        base64_encoded = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
+
+                        print("Base64 encoded data:")
+                        print(base64_encoded)
+                        yield base64_encoded
             except websockets.exceptions.ConnectionClosed as ce:
                 if "message" in data:
                     raise ApiError(body=data, status_code=ce.code)
