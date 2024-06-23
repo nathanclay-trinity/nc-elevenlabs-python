@@ -121,9 +121,6 @@ class RealtimeTextToSpeechClient(TextToSpeechClient):
                             json_str = json.dumps(data)
 
                             base64_encoded = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
-
-                            print("Base64 encoded data:")
-                            print(base64_encoded)
                             yield base64_encoded
                     except TimeoutError:
                         pass
@@ -137,9 +134,6 @@ class RealtimeTextToSpeechClient(TextToSpeechClient):
                         json_str = json.dumps(data)
 
                         base64_encoded = base64.b64encode(json_str.encode('utf-8')).decode('utf-8')
-
-                        print("Base64 encoded data:")
-                        print(base64_encoded)
                         yield base64_encoded
             except websockets.exceptions.ConnectionClosed as ce:
                 if "message" in data:
