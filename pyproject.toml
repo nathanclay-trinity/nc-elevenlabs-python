@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "elevenlabs"
+name = "nc-elevenlabs"
 version = "v1.3.1"
 description = ""
 readme = "README.md"
