@@ -53,7 +53,7 @@ class RealtimeTextToSpeechClient(TextToSpeechClient):
 
         Parameters:
             - voice_id: str. Voice ID to be used, you can use https://api.elevenlabs.io/v1/voices to list all the available voices.
-            
+
             - text: typing.Iterator[str]. The text that will get converted into speech.
 
             - model_id: typing.Optional[str]. Identifier of the model that will be used, you can query them using GET /v1/models. The model needs to have support for text to speech, you can check this using the can_do_text_to_speech property.
@@ -118,7 +118,9 @@ class RealtimeTextToSpeechClient(TextToSpeechClient):
                     try:
                         data = json.loads(socket.recv(1e-4))
                         if "audio" in data and data["audio"]:
-                            yield base64.b64decode(data["audio"])  # type: ignore
+                            print("yield data")
+                            print(data)
+                            yield data  # type: ignore
                     except TimeoutError:
                         pass
 
@@ -128,7 +130,9 @@ class RealtimeTextToSpeechClient(TextToSpeechClient):
 
                     data = json.loads(socket.recv())
                     if "audio" in data and data["audio"]:
-                        yield base64.b64decode(data["audio"])  # type: ignore
+                        print("yield data")
+                        print(data)
+                        yield data  # type: ignore
             except websockets.exceptions.ConnectionClosed as ce:
                 if "message" in data:
                     raise ApiError(body=data, status_code=ce.code)
