@@ -124,7 +124,7 @@ class ElevenLabs(BaseElevenLabs):
       model: Union[ModelId, Model] = "eleven_multilingual_v2",
       optimize_streaming_latency: typing.Optional[int] = 0,
       stream: bool = False,
-      output_format: Optional[str] = "mp3_22050_32",
+      output_format: Optional[str] = "mp3_44100_128",
       pronunciation_dictionary_locators: typing.Optional[
             typing.Sequence[PronunciationDictionaryVersionLocator]
         ] = OMIT,
